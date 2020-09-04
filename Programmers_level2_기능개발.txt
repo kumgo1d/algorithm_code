@@ -1,0 +1,38 @@
+class Solution {
+    fun solution(progresses: IntArray, speeds: IntArray): IntArray {
+        var answer = intArrayOf()
+        var array = mutableListOf<Int>()
+        var a = mutableListOf<Int>()
+        
+        for(i in progresses.indices) {
+            var tmp = progresses[i]
+            var count = 0
+            while(tmp < 100) {
+                tmp += speeds[i]
+                count++
+            }
+            array.add(i, count)
+        }
+        
+        var tmp = array[0]
+        var count = 1
+        var index = 0
+        for(i in 1 until array.size) {
+            if(tmp >= array[i]) {
+                count++
+            } else {
+                a.add(index, count)
+                count = 1
+                index++
+                tmp = array[i]
+            }
+            if(a.getOrNull(index) == null) {
+                a.add(index, count)
+            } else {
+                a.set(index, count)
+            }
+        }
+        answer = a.toIntArray()
+        return answer
+    }
+}
