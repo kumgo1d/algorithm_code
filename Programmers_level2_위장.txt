@@ -1,0 +1,22 @@
+class Solution {
+    fun solution(clothes: Array<Array<String>>): Int {
+        var answer = 1
+        
+        var map = mutableMapOf<String, Int>()
+        for(i in clothes.indices) {
+            map.set(clothes[i][1], 0)
+        }
+
+        for(i in clothes.indices) {
+            if(map.containsKey(clothes[i][1])) {
+                map.set(clothes[i][1], map[clothes[i][1]]!! + 1)
+            }
+        }
+
+        for(item in map.values) {
+            answer *= (item + 1)
+        }
+        answer -= 1
+        return answer
+    }
+}
