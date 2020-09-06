@@ -1,0 +1,14 @@
+class Solution {
+    fun solution(n: Int): Int {
+        var answer = 0
+        for(i in 0..n) {
+            for(j in 0..n) {
+                if(i * j == n) {
+                    answer += i
+                    break
+                }
+            }
+        }
+        return answer
+    }
+}
