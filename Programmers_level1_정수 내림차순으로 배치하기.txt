@@ -1,0 +1,13 @@
+class Solution {
+    fun solution(n: Long): Long {
+        var answer: Long = 0
+        var tmp = n.toString().toCharArray().sortedArrayDescending()
+        var s = ""
+        
+        for(i in 0 until tmp.size) {
+            s += tmp[i]
+        }
+        answer = s.toLong()
+        return answer
+    }
+}
