@@ -1,0 +1,12 @@
+class Solution {
+    fun solution(n: Int): Int {
+        var answer = 0
+        val tmp = n.toString().toList()
+
+        for(element in tmp) {
+            answer += element.toString().toInt()
+        }
+
+        return answer
+    }
+}
