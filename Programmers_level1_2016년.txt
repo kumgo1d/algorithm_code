@@ -1,0 +1,22 @@
+import java.time.LocalDate
+class Solution {
+    fun solution(a: Int, b: Int): String {
+        var answer = ""
+        var str = ""
+        var m = ""
+        var d = ""
+        
+        if(a < 10) m = "0${a}" 
+        else if(a >= 10) m = "$a"
+        
+        if(b < 10) d = "0${b}"
+        else if(b >= 10) d = "$b"
+        
+        str = "2016-${m}-${d}"
+        
+        val date = LocalDate.parse(str)
+        val day = date.dayOfWeek
+        answer = day.toString().subSequence(0, 3).toString()
+        return answer
+    }
+}
