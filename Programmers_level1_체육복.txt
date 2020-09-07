@@ -1,0 +1,48 @@
+class Solution {
+    fun solution(n: Int, lost: IntArray, reserve: IntArray): Int {
+        var answer = n - lost.size
+        var arr = mutableListOf<Boolean>()
+        var arr2 = mutableListOf<Boolean>()
+        
+        for(i in reserve.indices) {
+        arr.add(true)
+        for(j in lost.indices) {
+            if(reserve[i] == lost[j]) {
+                answer++
+                arr[i] = false
+                break
+            }
+        }
+    }
+
+    for(i in lost.indices) {
+        arr2.add(true)
+        for(j in reserve.indices) {
+            if(lost[i] == reserve[j]) {
+                arr2[i] = false
+                break
+            }
+        }
+    }
+        
+        for(i in lost.indices) {
+            for(j in reserve.indices) {
+                if(lost[i] == reserve[j] && arr[j] && arr2[i]) {
+                    answer++
+                    arr[j] = false
+                    break
+                } else if(lost[i] + 1 == reserve[j] && arr[j] && arr2[i]) {
+                    answer++
+                    arr[j] = false
+                    break
+                } else if(lost[i] - 1 == reserve[j] && arr[j] && arr2[i]) {
+                    answer++
+                    arr[j] = false
+                    break
+                }
+            }
+        }
+        
+        return answer
+    }
+}
