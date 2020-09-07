@@ -1,0 +1,18 @@
+class Solution {
+    fun solution(arr: IntArray, divisor: Int): IntArray {
+        var answer = intArrayOf()
+        var tmp = mutableListOf<Int>()
+        var count = 0
+        
+        arr.forEach {
+            if(it % divisor == 0) {
+                tmp.add(it)
+                count++
+            }
+        }
+        if(count == 0) tmp.add(-1)
+        answer = tmp.toIntArray()
+        answer.sort()
+        return answer
+    }
+}
