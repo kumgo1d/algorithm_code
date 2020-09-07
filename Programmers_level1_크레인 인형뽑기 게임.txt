@@ -1,0 +1,43 @@
+class Solution {
+    fun solution(board: Array<IntArray>, moves: IntArray): Int {
+        var answer = 0
+        var arr = board.toMutableList()
+        var list = mutableListOf<Int>()
+        
+        for(j in moves) {
+        var i = 0
+        while(true) {
+            if(i < arr.size) {
+                if(arr[i][j - 1] == 0) {
+                    i++
+                } else {
+                    list.add(arr[i][j - 1])
+                    arr[i][j - 1] = 0
+                    break
+                }
+            } else {
+                break
+            }
+        }
+    }
+
+    var isDone = false
+    while(!isDone) {
+        var tmp = list[0]
+        for(i in 1 until list.size) {
+            if(tmp == list[i]) {
+                answer += 2
+                list.removeAt(i)
+                list.removeAt(i-1)
+                isDone = false
+                break
+            } else {
+                tmp = list[i]
+                isDone = true
+            }
+        }
+        if(list.size == 1 || list.size == 0) break
+    }
+        return answer
+    }
+}
