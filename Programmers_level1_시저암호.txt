@@ -1,0 +1,20 @@
+class Solution {
+    fun solution(s: String, n: Int): String {
+        var answer = ""
+        val tmp = s.toCharArray()
+        for(i in tmp.indices) {
+            for(t in 1..n) {
+                if(tmp[i] == ' ') break
+                tmp[i] = tmp[i] + 1
+                if(tmp[i].toInt() == 'z'.toInt() + 1) {
+                    tmp[i] = 'a'
+                } else if(tmp[i].toInt() == 'Z'.toInt() + 1) {
+                    tmp[i] = 'A'
+                }               
+            }
+            answer += tmp[i].toString()
+        }
+        
+        return answer
+    }
+}
