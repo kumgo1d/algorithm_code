@@ -1,0 +1,14 @@
+class Solution {
+    fun solution(numbers: IntArray): String {
+        var answer = ""
+        var list = numbers.toMutableList()
+        list.sortedWith(Comparator { o1, o2 ->
+            o2.toString().plus(o1.toString())
+                .compareTo(o1.toString().plus(o2.toString()))})
+                .forEach {
+                    answer += it
+                }
+        if(answer < 1.toString()) answer = "0"
+        return answer
+    }
+}

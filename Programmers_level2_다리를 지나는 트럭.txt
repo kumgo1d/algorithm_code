@@ -1,0 +1,36 @@
+class Solution {
+    fun solution(bridge_length: Int, weight: Int, truck_weights: IntArray): Int {
+        var answer = 0
+        var truck = truck_weights.toMutableList()
+        var bridge = mutableListOf<Int>()
+        var w = weight
+        
+        for(i in 0 until bridge_length) {
+            bridge.add(0)
+        }
+
+        while(truck.isNotEmpty() || bridge.isNotEmpty()) {
+            answer++
+
+            if(bridge.size == bridge_length) {
+                w += bridge[0]
+                bridge.removeAt(0)
+            }
+
+            if(truck.isEmpty() && bridge.isNotEmpty()) {
+                bridge.removeAt(0)
+                continue
+            }
+
+            if(w >= truck[0]) {
+                w -= truck[0]
+                bridge.add(truck[0])
+                truck.removeAt(0)
+            } else {
+                bridge.add(0)
+            }
+        }
+        answer++
+        return answer
+    }
+}
