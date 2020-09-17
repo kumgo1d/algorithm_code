@@ -1,0 +1,30 @@
+class Solution {
+    fun reverse(x: Int): Int {
+        var answer = ""
+        var length = 0
+        var n = x.toLong()
+
+        if(n < 0) {
+            n = x.toString().split("-")[1].toLong()
+            length = n.toString().length
+        }
+        else {
+            length = n.toString().length
+        }
+
+        for(i in 0 until length) {
+            answer += n % 10
+            n /= 10
+        }
+        
+        if(x < 0) {
+            answer = "-${answer}"
+        }
+        try {
+            return answer.toInt()
+        } catch(e: NumberFormatException) {
+            return 0
+        }
+        
+    }
+}

@@ -1,0 +1,15 @@
+class Solution {
+    fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
+        var answer = 0.0
+        var list = (nums1 + nums2).toMutableList()
+        list.sort()
+
+        if(list.size % 2 == 0) {
+            answer = (list[list.size / 2].toDouble() + list[list.size / 2 - 1].toDouble()) / 2
+        }
+        else {
+            answer = list[list.size / 2].toDouble()
+        }
+        return answer
+    }
+}
