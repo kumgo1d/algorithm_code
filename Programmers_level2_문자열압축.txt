@@ -1,0 +1,62 @@
+class Solution {
+    fun solution(s: String): Int {
+        var answer = 0
+        var str = ""
+        var arr = mutableListOf<String>()
+        var lengthList = mutableListOf<Int>()
+
+        for(i in 0..s.length/2) {
+            when(i) {
+                0 -> lengthList.add(s.length)
+                else -> {
+                    var startIndex = 0
+                    for(j in s.indices) {
+                        var endIndex = startIndex + i
+                        if(startIndex <= s.length - i) {
+                            arr.add(s.substring(startIndex, endIndex))
+                        } else {
+                            if(startIndex <= s.length - 1) {
+                                var t = ""
+                                for(k in startIndex until s.length) {
+                                    t += s[k].toString()
+                                }
+                                arr.add(t)
+                            }
+                            break
+                        }
+                        startIndex += i
+                    }
+                    
+                    var tmp = arr[0]
+                    var count = 1
+                    for(j in 1 until arr.size) {
+                        if(tmp == arr[j]) {
+                            count++
+                        } else {
+                            if(count == 1) {
+                                str += tmp
+                            } else {
+                                str += count.toString() + tmp
+                            }
+                            count = 1
+                            tmp = arr[j]
+                        }
+                        if(j == arr.size-1) {
+                            if(count == 1) {
+                                str += tmp
+                            } else {
+                                str += count.toString() + tmp
+                            }
+                        }
+                    }
+                    
+                    lengthList.add(str.length)
+                    str = ""
+                    arr.clear()
+                }
+            }
+        }
+        answer = lengthList.min()!!.toInt()
+        return answer
+    }
+}
