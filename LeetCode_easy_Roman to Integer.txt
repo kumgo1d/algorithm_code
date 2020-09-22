@@ -1,0 +1,36 @@
+class Solution {
+    fun romanToInt(s: String): Int {
+        var answer = 0
+
+        for(i in s.indices) {
+            when(s[i]) {
+                'I' -> answer++
+                'V' -> {
+                    answer += if(i > 0 && s[i-1] == 'I') 3
+                     else 5
+                }
+                'X' -> {
+                    answer += if(i > 0 && s[i-1] == 'I') 8
+                    else 10
+                }
+                'L' -> {
+                    answer += if(i > 0 && s[i-1] == 'X') 30
+                    else 50
+                }
+                'C' -> {
+                    answer += if(i > 0 && s[i-1] == 'X') 80
+                    else 100
+                }
+                'D' -> {
+                    answer += if(i > 0 && s[i-1] == 'C') 300
+                    else 500
+                }
+                'M' -> {
+                    answer += if(i > 0 && s[i-1] == 'C') 800
+                    else 1000
+                }
+            }
+        }
+        return answer
+    }
+}

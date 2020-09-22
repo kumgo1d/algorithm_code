@@ -1,0 +1,19 @@
+class Solution {
+    fun longestCommonPrefix(strs: Array<String>): String {
+        if(strs.size < 1) return ""
+        var answer = strs[0]
+
+        for(i in 1 until strs.size) {
+            val l = Math.min(answer.length, strs[i].length)
+            if(l < answer.length) answer = answer.substring(0, l)
+
+            for(j in 0 until l) {
+                if(answer[j] != strs[i][j]) {
+                    answer = answer.substring(0, j)
+                    break
+                }
+            }
+        }
+        return answer
+    }
+}

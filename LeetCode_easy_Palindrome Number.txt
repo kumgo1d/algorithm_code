@@ -1,0 +1,10 @@
+class Solution {
+    fun isPalindrome(x: Int): Boolean {
+        var answer = false
+
+        if(x.toString().reversed() == x.toString()) {
+            answer = true
+        }
+        return answer
+    }
+}
