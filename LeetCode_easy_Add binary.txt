@@ -1,0 +1,25 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        if(a == null || a == "") return b;
+        if(b == null || b == "") return a;
+
+        int al = a.length() - 1;
+        int bl = b.length() - 1;
+        int n = 0;
+        String ans = "";
+        while(al >= 0 || bl >= 0 || n == 1) {
+            if(al >= 0) {
+                n += Integer.parseInt(String.valueOf(a.charAt(al)));
+                al--;
+            }
+            if(bl >= 0) {
+                n += Integer.parseInt(String.valueOf(b.charAt(bl)));
+                bl--;
+            }
+            ans = String.valueOf(n%2) + ans;
+            n /= 2;
+        }
+
+        return ans;
+    }
+}정답 참고

@@ -1,0 +1,15 @@
+class Solution {
+    public int mySqrt(int x) {
+        long n = 0;
+
+        while(true) {
+            if(n * n <= x && (n+1) * (n+1) > x) {
+                x = (int)n;
+                break;
+            }
+            n++;
+        }
+
+        return x;
+    }
+}
