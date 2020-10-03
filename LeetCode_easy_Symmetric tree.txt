@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) return true;
+        if(root.left == null && root.right == null) return true;
+        if(root.left == null || root.right == null) return false;
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        Stack<TreeNode> ls = new Stack<>();
+        Stack<TreeNode> rs = new Stack<>();
+        ls.push(left);
+        rs.push(right);
+
+        while(!ls.isEmpty() && !rs.isEmpty()) {
+            TreeNode lt = ls.pop();
+            TreeNode rt = rs.pop();
+
+            if(lt.val != rt.val) return false;
+
+            if(lt.left != null && rt.right != null) {
+                ls.push(lt.left);
+                rs.push(rt.right);
+            } else if(lt.left == null && rt.right == null) {
+
+            } else return false;
+
+            if(lt.right != null && rt.left != null) {
+                ls.push(lt.right);
+                rs.push(rt.left);
+            } else if(lt.right == null && rt.left == null) {
+
+            } else return false;
+        }
+        return true;
+    }
+}
