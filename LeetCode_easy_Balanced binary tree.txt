@@ -1,0 +1,16 @@
+class Solution {
+    public static boolean isBalanced(TreeNode root) {
+        return height(root) != -1;
+    }
+    public static int height(TreeNode node) {
+        if(node == null) return 0;
+
+        int lh = height(node.left);
+        if(lh == -1) return -1;
+        int rh = height(node.right);
+        if(rh == -1) return -1;
+
+        if(Math.abs(lh - rh) < 2) return Math.max(lh, rh) +1;
+        return -1;
+    }
+}정답 참고
