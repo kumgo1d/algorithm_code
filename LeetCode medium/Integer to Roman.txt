@@ -1,0 +1,17 @@
+class Solution {
+    public String intToRoman(int num) {
+        String[] larr = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] narr = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String roman = "";
+        
+        for(int i = 0; i < narr.length; i++) {
+            int romanNum = narr[i];
+            while(num >= romanNum) {
+                num -= romanNum;
+                roman += larr[i];
+            }
+        }
+        
+        return roman;
+    }
+}정답 참고
