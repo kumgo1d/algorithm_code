@@ -1,0 +1,21 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+        int answer = 0;
+
+        for(int i = 0; i < nums.length; i++) {
+            if(!isSame(nums[i], i, nums)) {
+                answer = nums[i];
+            }
+        }
+
+        return answer;
+    }
+    public boolean isSame(int num, int index, int[] nums) {
+        for(int i = 0; i < nums.length; i++) {
+            if(index != i && num == nums[i]) {
+                return true;
+            } 
+        }
+        return false;
+    }
+}

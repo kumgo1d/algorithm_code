@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null) return false;
+        
+        ListNode node = head;
+        Map<Integer, ListNode> map = new HashMap<>();
+        int n = 0;
+        
+        map.put(n++, node);
+        
+        while(node.next != null) {
+            node = node.next;
+            
+            for(int i = 0; i < map.size(); i++) {
+                if(map.get(i) == node) return true;
+            }
+            
+            map.put(n++, node);
+        }
+        
+        return false;
+    }
+}
