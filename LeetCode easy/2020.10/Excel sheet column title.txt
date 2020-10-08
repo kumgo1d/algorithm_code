@@ -1,0 +1,18 @@
+class Solution {
+    public static String convertToTitle(int n) {
+        String answer = "";
+
+        while(n > 0) {
+            int remainder = n%26;
+            n = n/26;
+
+            if(remainder == 0) {
+                remainder = 26;
+                n = n-1;
+            }
+            answer = (char)(remainder-1+'A') + answer;
+        }
+
+        return answer;
+    }
+}정답 참고

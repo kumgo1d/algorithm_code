@@ -1,0 +1,24 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int answer = 0;
+        int n = 0;
+
+        for(int i = 0; i < nums.length; i++) {
+            if(map.get(nums[i]) == null) {
+                map.put(nums[i], 1);
+            } else {
+                map.put(nums[i], map.get(nums[i]) + 1);
+            }
+        }
+
+        for(int i = 0; i < nums.length; i++) {
+            if(map.get(nums[i]) > n) {
+                n = map.get(nums[i]);
+                answer = nums[i];
+            }
+        }
+
+        return answer;
+    }
+}

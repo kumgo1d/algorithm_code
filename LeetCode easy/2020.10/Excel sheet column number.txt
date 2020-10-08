@@ -1,0 +1,22 @@
+class Solution {
+    public int titleToNumber(String s) {
+        char[] arr = s.toCharArray();
+        int index = 0, k = arr.length-1;
+        int n = 0;
+        //(int)arr[index] - 64;
+
+        while(index < arr.length) {
+            int i = (int)arr[index] - 64;
+            
+            for(int j = k; j > 0; j--) {
+                i *= 26;
+            }
+            
+            n += i;
+            index++;
+            k--;
+        }
+
+        return n;
+    }
+}
