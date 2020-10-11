@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null) return true;
+        ListNode tmp = new ListNode(head.val, head.next), p = tmp;
+        ListNode node = head;
+        head = head.next;
+
+        while(head != null) {
+            tmp = new ListNode(head.val, p);
+            p = tmp;
+            head = head.next;
+        }
+
+        while(node != null) {
+            if(node.val != p.val) return false;
+            node = node.next;
+            p = p.next;
+        }
+        return true;
+    }
+}

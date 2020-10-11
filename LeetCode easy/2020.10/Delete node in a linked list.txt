@@ -1,0 +1,13 @@
+class Solution {
+    public void deleteNode(ListNode node) {
+        while(node.next != null) {
+            if(node.next.next == null) {
+                node.val = node.next.val;
+                node.next = null;
+                break;
+            }
+            node.val = node.next.val;
+            node = node.next;
+        }
+    }
+}

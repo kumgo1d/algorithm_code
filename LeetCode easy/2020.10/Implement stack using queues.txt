@@ -1,0 +1,47 @@
+class MyStack {
+    Queue<Integer> tmp;
+    Queue<Integer> queue;
+
+    /** Initialize your data structure here. */
+    public MyStack() {
+        queue = new LinkedList<>();
+        tmp = new LinkedList<>();
+    }
+
+    /** Push element x onto stack. */
+    public void push(int x) {
+        queue.add(x);
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        int n = 0;
+        while(!queue.isEmpty()) {
+            n = queue.poll();
+            tmp.add(n);
+        }
+        tmp.remove(n);
+        while(!tmp.isEmpty()) {
+            queue.add(tmp.poll());
+        }
+        return n;
+    }
+
+    /** Get the top element. */
+    public int top() {
+        int n = 0;
+        while(!queue.isEmpty()) {
+            n = queue.poll();
+            tmp.add(n);
+        }
+        while(!tmp.isEmpty()) {
+            queue.add(tmp.poll());
+        }
+        return n;
+    }
+
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
