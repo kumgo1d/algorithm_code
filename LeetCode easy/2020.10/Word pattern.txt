@@ -1,0 +1,14 @@
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] sArr = s.split(" ");
+        if(sArr.length != pattern.length()) return false;
+
+        Map map = new HashMap<>();
+        for(Integer i = 0; i < sArr.length; i++) {
+            if(map.put(pattern.charAt(i), i) != map.put(sArr[i], i))
+                return false;
+        }
+
+        return true;
+    }
+}정답 참고
