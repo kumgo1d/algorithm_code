@@ -1,0 +1,24 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if(ransomNote.equals("") || ransomNote == null) return true;
+        char[] ransom = ransomNote.toCharArray();
+        char[] m = magazine.toCharArray();
+        boolean[] checkRan = new boolean[ransom.length];
+        boolean[] checkMag = new boolean[m.length];
+
+        for(int i = 0; i < ransom.length; i++) {
+            for(int j = 0; j < m.length; j++) {
+                if(ransom[i] == m[j] && !checkRan[i] && !checkMag[j]) {
+                    checkRan[i] = true;
+                    checkMag[j] = true;
+                }
+            }
+        }
+
+        for(boolean b : checkRan) {
+            if(b == false) return false;
+        }
+
+        return true;
+    }
+}

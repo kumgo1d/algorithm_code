@@ -1,0 +1,11 @@
+class Solution {
+    public int[] countBits(int num) {
+        int[] numBit = new int[num+1];
+
+        for(int i = 0; i <= num; i++) {
+            numBit[i] = Integer.bitCount(i);
+        }
+
+        return numBit;
+    }
+}
