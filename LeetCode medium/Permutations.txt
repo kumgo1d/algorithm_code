@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> answer = new ArrayList<>();
+        if(nums == null || nums.length == 0) return answer;
+        
+        backtracking(answer, new ArrayList<>(), nums);
+        
+        return answer;
+    }
+    public void backtracking(List<List<Integer>> answer, List<Integer> list, int[] nums) {
+        if(list.size() == nums.length) {
+            answer.add(new ArrayList<>(list));
+        } else {
+            for(int i = 0; i <= list.size(); i++) {
+                list.add(i, nums[list.size()]);
+                backtracking(answer, list, nums);
+                list.remove(i);
+            }
+        }
+    }
+}정답 참고

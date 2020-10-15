@@ -1,0 +1,19 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int[] sf = new int[26];
+        int[] tf = new int[26];
+        
+        for(int i = 0; i < s.length(); i++) {
+            sf[s.charAt(i) - 'a']++;
+            tf[t.charAt(i) - 'a']++;
+        }
+        tf[t.charAt(t.length()-1) - 'a']++;
+        
+        for(int i = 0; i < sf.length; i++) {
+            if(sf[i] != tf[i]) {
+                return (char)('a' + i);
+            }
+        }
+        return 0;
+    }
+}
