@@ -1,0 +1,8 @@
+SELECT
+    c.Name AS 'Customers'
+FROM
+    Customers AS c
+WHERE c.id not in
+(
+    SELECT CustomerId from Orders
+);정답 참고
