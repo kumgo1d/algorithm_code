@@ -1,0 +1,18 @@
+class Solution {
+    public int findComplement(int num) {
+        String bit = Integer.toBinaryString(num);
+        int n = 0, count = 0;
+
+        for(int i = bit.length()-1; i >= 0; i--) {
+            count++;
+            int b = Integer.parseInt(String.valueOf(bit.charAt(i)));
+            b = b == 1 ? 0 : 1;
+            for(int j = 1; j < count; j++) {
+                b *= 2;
+            }
+            n += b;
+        }
+
+        return n;
+    }
+}
