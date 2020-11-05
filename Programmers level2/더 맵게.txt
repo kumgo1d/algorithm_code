@@ -1,0 +1,21 @@
+class Solution {
+    public int solution(int[] scoville, int K) {
+        int answer = 0;
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+        for(int s : scoville) {
+            heap.offer(s);
+        }
+
+        while (heap.peek() < K) {
+            if(heap.size() == 1) return -1;
+
+            int v1 = heap.poll();
+            int v2 = heap.poll();
+
+            heap.add(v1 + v2*2);
+            answer++;
+        }
+        return answer;
+    }
+}
