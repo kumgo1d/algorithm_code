@@ -1,0 +1,22 @@
+import java.util.*;
+class Solution {
+    boolean solution(String s) {
+        boolean answer = true;
+        char left = '(';
+        char right = ')';
+        int index = 0;
+        Stack<Character> stack = new Stack<>();
+
+        while(index < s.length()) {
+            if(s.charAt(index) == left) {
+                stack.add(s.charAt(index));
+            } else {
+                if(!stack.isEmpty()) stack.pop();
+                else return false;
+            }
+            index++;
+        }
+        answer = stack.isEmpty();
+        return answer;
+    }
+}
