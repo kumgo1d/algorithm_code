@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> answer = new ArrayList<>();
+        String[] keyboard = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs",
+                        "tuv", "wxyz"};
+        StringBuilder sb = new StringBuilder();
+        if(digits == null || digits.length() == 0) return answer;
+
+        dfs(digits, 0, sb, keyboard, answer);
+
+        return answer;
+    }
+    public void dfs(String digits, int index, StringBuilder sb, String[] keyboard, List<String> list) {
+        if(digits.length() == index) {
+            list.add(sb.toString());
+            return;
+        }
+
+        String str = keyboard[digits.charAt(index) - '0'];
+        for(int i = 0; i < str.length(); i++) {
+            sb.append(str.charAt(i));
+            dfs(digits, index+1, sb, keyboard, list);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}
