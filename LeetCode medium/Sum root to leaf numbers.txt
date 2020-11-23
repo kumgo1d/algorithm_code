@@ -1,0 +1,17 @@
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        int sum = 0;
+        sum = dfs(root, "");
+        return sum;
+    }
+    public int dfs(TreeNode node, String number) {
+        if(node == null) return 0;
+        number += String.valueOf(node.val);
+
+        if(node.left == null && node.right == null) {
+            return Integer.parseInt(number);
+        }
+
+        return dfs(node.left, number) + dfs(node.right, number);
+    }
+}
