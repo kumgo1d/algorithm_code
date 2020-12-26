@@ -1,0 +1,39 @@
+class Solution {
+    public String convertToBase7(int num) {
+        String result = "";
+        int tmp = num, index = 0;
+        if(num > 0) {
+            index = String.valueOf(num).length() + 1;
+        }
+        else {
+            index = String.valueOf(num).length();
+            tmp *= -1;
+            result += "-";
+        }
+
+        while(index >= 0) {
+            int n = helper(index);
+            for(int i = 6; i > 0; i--) {
+                if(n*i <= tmp) {
+                    tmp -= n*i;
+                    result += i;
+                    break;
+                } else {
+                    if(i == 1) {
+                        result += 0;
+                    }
+                }
+            }
+            index--;
+        }
+
+        return String.valueOf(Integer.parseInt(result));
+    }
+    public int helper(int num) {
+        int result = 1;
+        for(int i = 0; i < num; i++) {
+            result *= 7;
+        }
+        return result;
+    }
+}
