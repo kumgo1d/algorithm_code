@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] priorities, int location) {
+        int answer = 0;
+        int l = location;
+        int count = 0;
+        boolean isDone = false;
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for(int i = 0 ; i < priorities.length; i++) {
+            list.add(priorities[i]);
+        }
+
+        while(list.size() > 0) {
+            for(int i = 0; i < list.size(); i++) {
+                if(list.get(0) < list.get(i)) {
+                    list.add(list.get(0));
+                    list.remove(0);
+                    isDone = true;
+                    if(l != 0) l--;
+                    else l = list.size() - 1;
+                    break;
+                }
+            }
+            if(isMax(list)) {
+                list.remove(0);
+                count++;
+                if(l == 0) break;
+                l--;
+            }
+        }
+        answer = count;
+        return answer;
+    }
+    public boolean isMax(ArrayList<Integer> list) {
+        if(list.size() == 1) return true;
+        int max = list.get(0);
+        for(int i = 1; i < list.size(); i++) {
+            if(max < list.get(i)) return false;
+        }
+        return true;
+    }
+}
