@@ -1,0 +1,52 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        int answer = 0;
+        int w = weight;
+        List<Integer> list = new ArrayList<>();
+        List<Integer> bridge = new ArrayList<>(bridge_length);
+
+        for(int i = 0; i < truck_weights.length; i++) {
+            list.add(truck_weights[i]);
+        }
+        
+        for(int i = 0; i < bridge_length; i++) {
+            bridge.add(0);
+        }
+
+        while(list.size() > 0 || bridge.size() > 0) {
+            answer++;
+            
+            if(bridge.size() == bridge_length) {
+                w += bridge.get(0);
+                bridge.remove(0);
+            }
+            
+            if(list.size() == 0) {
+                bridge.add(0);
+                if(isZero(bridge)) {
+                    break;
+                }
+                continue;
+            }
+            
+            if(w >= list.get(0)) {
+                w -= list.get(0);
+                bridge.add(list.get(0));
+                list.remove(0);
+            } else {
+                bridge.add(0);
+            }
+        }
+        
+        return answer;
+    }
+    
+    public boolean isZero(List<Integer> list) {
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i) != 0) return false;
+        }
+        return true;
+    }
+}
