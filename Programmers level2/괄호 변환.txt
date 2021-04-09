@@ -1,0 +1,68 @@
+import java.util.*;
+class Solution {
+    public String solution(String p) {
+        String answer = "";
+        StringBuilder sb = new StringBuilder();
+        
+        return setParenthesis(p, sb);
+    }
+
+    public int splitString(String p) {
+        int num = 0;
+        int count = 0;
+        for(int i = 0; i < p.length(); i++) {
+            if(p.charAt(i) == '(') num++;
+            else num--;
+
+            if(num == 0) {
+                count = i + 1;
+                break;
+            }
+        }
+
+        return count;
+    }
+
+    public boolean isValidParenthesis(String p) {
+        int num = 0;
+        for(int i = 0; i < p.length(); i++) {
+            if(p.charAt(i) == '(') num++;
+            else num--;
+
+            if(num < 0) return false;
+        }
+        return true;
+    }
+    
+    public String setValidParenthesis(String p) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < p.length()-1; i++) {
+            if(p.charAt(i) == '(') sb.append(")");
+            else sb.append("(");
+        }
+        return sb.toString();
+    }
+    
+    public String setParenthesis(String p, StringBuilder sb) {
+        int index = splitString(p);
+        String u = p.substring(0, index);
+        String v = p.substring(index);
+
+        System.out.println(u);
+        if(isValidParenthesis(u)) sb.append(u);
+        else {
+            sb.append("(");
+            if(!v.equals("")) {
+                setParenthesis(v, sb);
+                v = "";
+            }
+            sb.append(")");
+            sb.append(setValidParenthesis(u));
+        }
+        if(!v.equals("")) {
+            setParenthesis(v, sb);
+        }
+        
+        return sb.toString();
+    }
+}
