@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    public List<String> solution(String[] orders, int[] course) {
+        String[] answer = {};
+        int[] arr = new int[course.length];
+        List<String> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < orders.length; i++) {
+            char[] c = orders[i].toCharArray();
+            Arrays.sort(c);
+            stringCombine(c, new StringBuilder(), 0, map);
+        }
+        
+        for(int i = 0; i < course.length; i++) {
+            for(Map.Entry<String, Integer> entry : map.entrySet()) {
+                if(entry.getKey().length() == course[i] && entry.getValue() > arr[i]) {
+                    arr[i] = entry.getValue();
+                }
+            }
+
+            for(Map.Entry<String, Integer> entry : map.entrySet()) {
+                if(arr[i] > 1 && entry.getKey().length() == course[i] && entry.getValue() == arr[i]) {
+                    list.add(entry.getKey());
+                }
+            }
+        }
+        
+        list.sort(null);
+        
+        return list;
+    }
+    
+    public void stringCombine(char[] c, StringBuilder sb, int index, Map<String, Integer> map) {
+        for(int i = index; i < c.length; i++) {
+            sb.append(c[i]);
+            map.put(sb.toString(), map.getOrDefault(sb.toString(), 0) + 1);
+            stringCombine(c, sb, i+1, map);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}
