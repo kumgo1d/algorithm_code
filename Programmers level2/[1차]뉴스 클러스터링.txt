@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    public int solution(String str1, String str2) {
+        int answer = 0;
+        Map<String, Integer> mapA = new HashMap<>();
+        Map<String, Integer> mapB = new HashMap<>();
+
+        setList(str1, mapA);
+        setList(str2, mapB);
+        
+        float a = 0f, b = 0f;
+        for(Map.Entry<String, Integer> entry : mapA.entrySet()) {
+            if(mapB.containsKey(entry.getKey())) {
+                a += Math.min(entry.getValue(), mapB.get(entry.getKey()));
+                b += Math.max(entry.getValue(), mapB.get(entry.getKey()));
+            } else {
+                b += entry.getValue();
+            }
+        }
+        
+        for(Map.Entry<String, Integer> entry : mapB.entrySet()) {
+            if(!mapA.containsKey(entry.getKey())) {
+                b += entry.getValue();
+            }
+        }
+        
+        if(a != 0 || b != 0) answer = (int)(a/b * 65536);
+        else answer = 1 * 65536;
+        
+        return answer;
+    }
+    
+    public void setList(String str, Map<String, Integer> map) {
+        for(int i = 0; i < str.length()-1; i++) {
+            char c1 = str.toLowerCase().charAt(i);
+            char c2 = str.toLowerCase().charAt(i+1);
+            if(c1 < 97 || c1 > 122 || c2 < 97 || c2 > 122) continue;
+            String s = (str.substring(i, i+2)).toLowerCase();
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
+    }
+}
