@@ -1,0 +1,50 @@
+class Solution {
+    public String solution(int n, int t, int m, int p) {
+        String answer = "";
+        StringBuilder sb = new StringBuilder();
+        int count = 0, num = 0, order = 1;
+        
+        while(count < t) {
+            int tmp = num;
+            StringBuilder str = new StringBuilder();
+
+            if(tmp == 0) {
+                str.append("0");
+            } else {
+                if(n > 10) {
+                    while(tmp > 0) {
+                        if(tmp % n == 10) str.insert(0, "A");
+                        else if(tmp % n == 11) str.insert(0, "B");
+                        else if(tmp % n == 12) str.insert(0, "C");
+                        else if(tmp % n == 13) str.insert(0, "D");
+                        else if(tmp % n == 14) str.insert(0, "E");
+                        else if(tmp % n == 15) str.insert(0, "F");
+                        else str.insert(0, (tmp % n));
+                        tmp /= n;
+                    }
+                } else {
+                    while(tmp > 0) {
+                        str.insert(0, (tmp % n));
+                        tmp /= n;
+                    }
+                }
+            }
+
+            for(int i = 0; i < str.length(); i++) {
+                if(order == p) {
+                    count++;
+                    sb.append(str.charAt(i));
+                    if(count == t) break;
+                }
+                order++;
+                if(order > m) order = 1;
+            }
+
+            num++;
+        }
+        
+        answer = sb.toString();
+        
+        return answer;
+    }
+}
