@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    static List<String> list = new ArrayList<>();
+    static StringBuilder sb = new StringBuilder();
+    public String[] solution(String[][] tickets) {
+        String[] answer = {};
+        boolean[] visited = new boolean[tickets.length];
+
+        for(int i = 0; i < tickets.length; i++) {
+            if(tickets[i][0].equals("ICN")) {
+                visited[i] = true;
+                sb.append(tickets[i][0]);
+                dfs(tickets[i][1], visited, 1, tickets);
+                sb = new StringBuilder();
+                visited[i] = false;
+            }
+        }
+
+        Collections.sort(list);
+        answer = list.get(0).split(",");
+
+        return answer;
+    }
+
+    public void dfs(String str, boolean[] visited, int count, String[][] tickets) {
+        sb.append(","  + str);
+
+        if(count == tickets.length) {
+            list.add(sb.toString());
+            return;
+        }
+
+        for(int i = 0; i < tickets.length; i++) {
+            if(!visited[i] && str.equals(tickets[i][0])) {
+                visited[i] = true;
+                dfs(tickets[i][1], visited, count+1, tickets);
+                visited[i] = false;
+                sb.delete(sb.length()-4, sb.length());
+            }
+        }
+    }
+}
