@@ -1,0 +1,38 @@
+import java.util.*;
+class Solution {
+    public int[] solution(String[] operations) {
+        int[] answer = new int[2];
+        List<String> list = new ArrayList<>();
+        
+        for(int i = 0; i < operations.length; i++) {
+            if(operations[i].equals("D 1")) {
+                int n = Integer.MIN_VALUE;
+                for(int j = 0; j < list.size(); j++) {
+                    n = Math.max(n, Integer.parseInt(list.get(j)));
+                }
+                list.remove(String.valueOf(n));
+            } 
+            else if(operations[i].equals("D -1")) {
+                int n = Integer.MAX_VALUE;
+                for(int j = 0; j < list.size(); j++) {
+                    n = Math.min(n, Integer.parseInt(list.get(j)));
+                }
+                list.remove(String.valueOf(n));
+            } 
+            else {
+                list.add(operations[i].split(" ")[1]);
+            }
+        }
+        
+        if(list.size() == 0) return answer;
+        
+        answer[0] = Integer.MIN_VALUE;
+        answer[1] = Integer.MAX_VALUE;
+        for(int i = 0; i < list.size(); i++) {
+            answer[0] = Math.max(answer[0], Integer.parseInt(list.get(i)));
+            answer[1] = Math.min(answer[1], Integer.parseInt(list.get(i)));
+        }
+        
+        return answer;
+    }
+}
