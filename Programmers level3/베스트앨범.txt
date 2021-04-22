@@ -1,0 +1,61 @@
+import java.util.*;
+class Solution {
+    public int[] solution(String[] genres, int[] plays) {
+        
+        List<String> list = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < genres.length; i++) {
+            list.add(genres[i] + "," + plays[i]);
+            map.put(genres[i], map.getOrDefault(genres[i], 0) + plays[i]);
+        }
+        
+        while(map.size() != 0) {
+            List<String> nums = new ArrayList<>();
+            
+            int n = 0;
+            String s = "";
+            for(Map.Entry<String, Integer> entry : map.entrySet()) {
+                if(n < entry.getValue()) {
+                    n = entry.getValue();
+                    s = entry.getKey();
+                }
+            }
+            map.remove(s);
+            
+            for(int i = 0; i < list.size(); i++) {
+                String[] tmp = list.get(i).split(",");
+                if(s.equals(tmp[0])) {
+                    nums.add(tmp[1] + "," + i);
+                }
+            }
+            
+            for(int i = 0; i < nums.size()-1; i++) {
+                for(int j = i+1; j < nums.size(); j++) {
+                    String[] s1 = nums.get(i).split(",");
+                    String[] s2 = nums.get(j).split(",");
+                    if(Integer.parseInt(s1[0]) < Integer.parseInt(s2[0])) {
+                        String str = nums.get(i);
+                        nums.set(i, nums.get(j));
+                        nums.set(j, str);
+                    }
+                }
+            }
+            // System.out.println(nums);
+            if(nums.size() > 1) {
+                result.add(Integer.parseInt(nums.get(0).split(",")[1]));
+                result.add(Integer.parseInt(nums.get(1).split(",")[1]));
+            } else {
+                result.add(Integer.parseInt(nums.get(0).split(",")[1]));
+            }
+        }
+        
+        int[] answer = new int[result.size()];
+        for(int i = 0; i < result.size(); i++) {
+            answer[i] = result.get(i);
+        }
+        
+        return answer;
+    }
+}
