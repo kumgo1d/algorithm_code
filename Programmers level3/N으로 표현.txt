@@ -1,0 +1,49 @@
+import java.util.*;
+class Solution {
+    static Set<Integer> set = new HashSet<>();
+    public int solution(int N, int number) {
+        int answer = Integer.MAX_VALUE;
+        List<Integer> list = new ArrayList<>();
+        //N, N/N, NN/N, NN, 
+        String s = String.valueOf(number);
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < s.length(); i++) {
+            sb.append(N);
+            list.add(Integer.parseInt(sb.toString()));
+            list.add(Integer.parseInt(sb.toString())/N);
+        }
+        
+        df(0, 0, number, list);
+        
+        if(set.size() == 0) return -1;
+        for(int n : set) {
+            answer = Math.min(answer, n);
+        }
+        
+        return answer;
+    }
+    
+    public void df(int count, int sum, int target, List<Integer> list) {
+        if(count > 8) return;
+        if(sum == target) {
+            set.add(count);
+            return;
+        }
+        
+        for(int i = 0; i < list.size(); i++) {
+            String s = list.get(i) + "";
+            if(i%2 == 0) {
+                df(count + s.length(), sum+list.get(i), target, list);
+                df(count + s.length(), sum-list.get(i), target, list);
+                df(count + s.length(), sum*list.get(i), target, list);
+                df(count + s.length(), sum/list.get(i), target, list);
+            } else {
+                df(count + s.length()+1, sum+list.get(i), target, list);
+                df(count + s.length()+1, sum-list.get(i), target, list);
+                df(count + s.length()+1, sum*list.get(i), target, list);
+                df(count + s.length()+1, sum/list.get(i), target, list);
+            }
+        }
+    }
+}
