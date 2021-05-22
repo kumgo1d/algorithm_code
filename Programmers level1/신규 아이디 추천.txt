@@ -1,0 +1,50 @@
+@OptIn(kotlin.ExperimentalStdlibApi::class)
+class Solution {
+    fun solution(new_id: String): String {
+        var answer: String = ""
+        var sb = StringBuilder(new_id.toLowerCase())
+        
+        answer = eliminate(sb)
+        
+        return answer
+    }
+    
+    fun eliminate(new: StringBuilder): String {
+        
+        for(i in new.length-1 downTo 0) {
+            if(new[i] != '-' && new[i] != '_' &&
+                    new[i] != '.' && new[i] !in '0'..'9' && 
+                    new[i] !in 'a'..'z') {
+                new.deleteAt(i)
+            }
+        }
+        
+        var count = 0
+        for(i in new.length-1 downTo 0) {
+            if(new[i] == '.') {
+                count++
+                if(count > 1) {
+                    new.deleteAt(i)
+                    count--
+                }
+            } else {
+                count = 0
+            }
+        }
+        
+        if(new.length > 0 && new[new.length-1] == '.') new.deleteAt(new.length-1)
+        if(new.length > 0 && new[0] == '.') new.deleteAt(0)
+        
+        
+        if(new.length == 0) new.append("a")
+        
+        if(new.length > 15) new.deleteRange(15, new.length)
+        if(new[new.length-1] == '.') new.deleteAt(new.length-1)
+        
+        while(new.length <= 2) {
+            new.append(new[new.length-1])
+        }
+        
+        return new.toString()
+    }
+}
